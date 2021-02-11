@@ -22,13 +22,15 @@ exports.postRegister = (req, res, next) => {
                 email: email,
                 password: hashpassword
             });
-           return user.save();
+            user.save((error, newuser) => {
+                if (error) {
+                    res.status(422).json({
+                        message: 'Something went wrong , please try some time later! '
+                    });
+                }
+                res.send({ newuser });
+            })
         })
-        .then(result => {
-            // console.log(result);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+
 
 }
