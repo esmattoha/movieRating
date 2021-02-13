@@ -12,12 +12,14 @@ const JwtStrategy = passportJwt.Strategy;
 const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'movieratingapplicationsecretkey';
+const serveStatic = require('serve-static');
 
 const app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
+app.use(serveStatic(__dirname + '/dist'));
 
 const MovieRoutes = require('./routers/movie');
 const UserRoutes = require('./routers/users')

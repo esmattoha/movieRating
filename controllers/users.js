@@ -9,16 +9,10 @@ const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
 jwtOptions.secretOrKey = 'thisissecretkey';
 
-// exports.getLogin = (req, res, next) =>{
-//     User.find({})
-//     .then(res => {
-//         console.log(res);
-//     })
-//     .catch(err=>{
-//         console.log(err);
-//     })
-// }
-exports.postRegister = (req, res, next) => {
+// Post  Registered Form
+
+exports.postRegister = (app) => {
+  app.post('/user/register',(req, res) =>{
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
@@ -39,9 +33,13 @@ exports.postRegister = (req, res, next) => {
                 res.send({ newuser });
             })
         })
+  })
+    
 }
 
-exports.postLogin =(req, res, next) =>{
+// Post Login Form 
+
+exports.postLogin =(req, res) =>{
     const email = req.body.email;
     const password = req.body.password;
 
